@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+          background-color: #333;
+          color: #fff;
+          padding: 10px;
+          text-align: center;
+        }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+      }
+      nav {
+          background-color: #f4f4f4;
+          padding: 10px;
+          text-align: center;
+        }
+      nav a {
+          text-decoration: none;
+          margin: 0 10px;
+          color: #333;
+        }
+      .container {
+          max-width: 1200px;
+          margin: auto;
+          padding: 20px;
+        }
+      h2 {
+        margin-top: 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      tr:hover {
+        background-color: #f2f2f2;
+      }
+      .button {
+        display: inline-block;
+        background-color: #4caf50;
+        color: white;
+        padding: 8px 12px;
+        margin-right: 5px;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .button:hover {
+        background-color: #45a049;
+      }
+      .add-button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        border: none;
+        display: block;
+        width: 150px;
+        margin-top: 20px;
+      }
+      .add-button:hover {
+        background-color: #45a049;
+      }
+      .edit-input {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    </style>
+</head>
+<body>
+    <header>
+      <h1>ERP System</h1>
+  </header>
+  <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="products.html">Products Management</a>
+      <a href="orders.html">Orders Management</a>
+      <a href="#calendar">Orders Calendar View</a>
+    </nav>
+<div class="container">
+
+    <div>
+        <p>Number of Products: <span id="productCountPlaceholder"></span></p>
+        <p>Number of Orders: <span id="orderCount"></span></p>
+    
+    </div>
+    <script src="dashboard.js"></script>
+</body>
+</html>

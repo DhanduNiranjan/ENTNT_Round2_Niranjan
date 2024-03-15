@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+      }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    nav {
+        background-color: #f4f4f4;
+        padding: 10px;
+        text-align: center;
+      }
+    nav a {
+        text-decoration: none;
+        margin: 0 10px;
+        color: #333;
+      }
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+    h2 {
+      margin-top: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+    .button {
+      display: inline-block;
+      background-color: #4caf50;
+      color: white;
+      padding: 8px 12px;
+      margin-right: 5px;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+    .add-button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+      border: none;
+      display: block;
+      width: 150px;
+      margin-top: 20px;
+    }
+    .add-button:hover {
+      background-color: #45a049;
+    }
+    .edit-input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <h1>ERP System</h1>
+    </header>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="products.html">Products Management</a>
+        <a href="orders.html">Orders Management</a>
+        <a href="#calendar">Products Calendar View</a>
+      </nav>
+  <div class="container">
+    <h2>Product Management</h2>
+    <table  id="ProductTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock_Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="ProductTableBody">
+        <tr>
+          <td>product 1</td>
+          <td>applicances </td>
+          <td>$900</td>
+          <td>1000</td>
+          <td>
+            <button class="button edit-button">Edit</button>
+            <button class="button delete-button">Delete</button>
+          </td>
+        </tr>
+        <!-- Add more Order rows dynamically here using JavaScript -->
+      </tbody>
+    </table>
+    <a href="#" class="add-button" id="addProductButton">Add Product</a>
+
+    <p>Total Products: <span id="productCount"></span></p>
+  </div>
+
+  <script>
+    // Function to add new Product row
+    function addProductRow(Name , Category , Price, Stock_Quantity) {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td>${Name}</td>
+        <td>${Category}</td>
+        <td>${Price}</td>
+        <td>${Stock_Quantity}</td>
+        <td>
+          <button class="button edit-button">Edit</button>
+          <button class="button delete-button">Delete</button>
+        </td>
+      `;
+      document.getElementById("ProductTableBody").appendChild(newRow);
+      attachEventListeners(newRow);
+    }
+
+    // Function to attach event listeners to edit and delete buttons
+    function attachEventListeners(row) {
+      row.querySelector(".edit-button").addEventListener("click", editProduct);
+      row.querySelector(".delete-button").addEventListener("click", deleteProduct);
+    }
+
+// Edit product function
+    function editProduct(event) {
+      const row = event.target.closest("tr");
+      const cells = row.querySelectorAll("td");
+      const Name = cells[0].textContent;
+      const Category = cells[1].textContent;
+      const Price= cells[2].textContent;
+      const Stock_Quantity= cells[3].textContent;
+
+      // Prompt for status
+      // const newStatus = prompt("Enter Price:", Price);
+
+      // Prompt for Product Date using date picker
+      
+      
+    }
+
+    // Delete Product function
+    function deleteProduct(event) {
+      const row = event.target.closest("tr");
+      row.remove();
+    }
+
+    // Add Product button event listener
+    document.getElementById("addProductButton").addEventListener("click", function() {
+      const Name = prompt("Enter Name:");
+      const Category = prompt("Enter Category:");
+      const Price= prompt("Enter Price:");
+      const Stock_Quantity = prompt("Enter Stock_Quantity:");
+      if (Name && Category && Price && Stock_Quantity ) {
+        addProductRow(Name , Category ,Price ,Stock_Quantity);
+      }
+    });
+
+    // Attach event listeners to existing rows
+    document.querySelectorAll(".edit-button").forEach(button => {
+      button.addEventListener("click", editProduct);
+    });
+    document.querySelectorAll(".delete-button").forEach(button => {
+      button.addEventListener("click", deleteProduct);
+    });
+
+    
+  </script>
+  <script src="products.js"></script>
+</body>
+</html>

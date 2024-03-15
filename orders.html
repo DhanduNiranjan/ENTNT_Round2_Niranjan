@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        text-align: center;
+      }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    nav {
+        background-color: #f4f4f4;
+        padding: 10px;
+        text-align: center;
+      }
+    nav a {
+        text-decoration: none;
+        margin: 0 10px;
+        color: #333;
+      }
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+      }
+    h2 {
+      margin-top: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:hover {
+      background-color: #f2f2f2;
+    }
+    .button {
+      display: inline-block;
+      background-color: #4caf50;
+      color: white;
+      padding: 8px 12px;
+      margin-right: 5px;
+      text-decoration: none;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .button:hover {
+      background-color: #45a049;
+    }
+    .add-button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+      border: none;
+      display: block;
+      width: 150px;
+      margin-top: 20px;
+    }
+    .add-button:hover {
+      background-color: #45a049;
+    }
+    .edit-input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <h1>ERP System</h1>
+    </header>
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="products.html">Products Management</a>
+        <a href="orders.html">Orders Management</a>
+        <a href="#calendar">Orders Calendar View</a>
+      </nav>
+  <div class="container">
+    <h2>Order Management</h2>
+    <table id ="orderstable">
+      <thead>
+        <tr>
+          <th>Order_Id</th>
+          <th>Customer_Name</th>
+          <th>Order_Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="OrderTableBody">
+        <tr>
+          <td>Order 1</td>
+          <td>Category A</td>
+          <td>2023-01-01</td>
+          <td>Initiated</td>
+          <td>
+            <button class="button edit-button">Edit</button>
+            <button class="button delete-button">Delete</button>
+          </td>
+        </tr>
+        <!-- Add more Order rows dynamically here using JavaScript -->
+      </tbody>
+    </table>
+    <a href="#" class="add-button" id="addOrderButton">Add Order</a>
+  </div>
+
+  <script>
+    // Function to add new Order row
+    function addOrderRow(Order_Id, Customer_Name, Order_Date, status) {
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+        <td>${Order_Id}</td>
+        <td>${Customer_Name}</td>
+        <td>${Order_Date}</td>
+        <td>${status}</td>
+        <td>
+          <button class="button edit-button">Edit</button>
+          <button class="button delete-button">Delete</button>
+        </td>
+      `;
+      document.getElementById("OrderTableBody").appendChild(newRow);
+      attachEventListeners(newRow);
+    }
+
+    // Function to attach event listeners to edit and delete buttons
+    function attachEventListeners(row) {
+      row.querySelector(".edit-button").addEventListener("click", editOrder);
+      row.querySelector(".delete-button").addEventListener("click", deleteOrder);
+    }
+
+    // Edit Order function
+    function editOrder(event) {
+      const row = event.target.closest("tr");
+      const cells = row.querySelectorAll("td");
+      const Order_Id = cells[0].textContent;
+      const Customer_Name = cells[1].textContent;
+      const Order_Date = cells[2].textContent;
+      const status = cells[3].textContent;
+
+      // Prompt for status
+      const newStatus = prompt("Enter status:", status);
+
+      // Prompt for Order Date using date picker
+      const newOrderDate = prompt("Enter Order date (YYYY-MM-DD):", Order_Date);
+
+      if (newStatus !== null && newOrderDate !== null) {
+        cells[2].textContent = newOrderDate;
+        cells[3].textContent = newStatus;
+      }
+    }
+
+    // Delete Order function
+    function deleteOrder(event) {
+      const row = event.target.closest("tr");
+      row.remove();
+    }
+
+    // Add Order button event listener
+    document.getElementById("addOrderButton").addEventListener("click", function() {
+      const Order_Id = prompt("Enter Order Id:");
+      const Customer_Name = prompt("Enter Customer Name:");
+      const Order_Date = prompt("Enter Order Date (YYYY-MM-DD):");
+      const status = prompt("Enter status:");
+      if (Order_Id && Customer_Name && Order_Date && status) {
+        addOrderRow(Order_Id, Customer_Name, Order_Date, status);
+      }
+    });
+
+    // Attach event listeners to existing rows
+    document.querySelectorAll(".edit-button").forEach(button => {
+      button.addEventListener("click", editOrder);
+    });
+    document.querySelectorAll(".delete-button").forEach(button => {
+      button.addEventListener("click", deleteOrder);
+    });
+
+    //
+
+    
+  </script>
+  <script src="orders.js"></script>
+</body>
+</html>
+
